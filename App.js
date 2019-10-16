@@ -6,12 +6,24 @@ export default class App extends React.Component {
   render() {
     return (
         <MapView 
+          mapType = { "standard" }
           style = { styles.container } 
           provider = { MapView.PROVIDER_GOOGLE } 
-          customMapStyle = { mapStyle } />
+          customMapStyle = { mapStyle } 
+          initialRegion = { regionDefault }
+          showsUserLocation = { true }
+          pitchEnabled = { false }
+        />
     );
   }
 }
+
+var regionDefault = {
+    latitude: 37.7680,
+    longitude: -122.4225,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+};
 
 const styles = StyleSheet.create({
   container: {
