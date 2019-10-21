@@ -10,23 +10,21 @@ import {
     View,
     Text,
     TouchableOpacity,
-    Platform,
-    PermissionsAndroid
+    Platform
 } from "react-native";
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import haversine from "haversine";
 
+// Components
+import Navigation from './components/Navigation.js';
 
+// Constants
 const LATITUDE = 37.7680;
 const LONGITUDE = -122.4225;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = 0.0421;
-
-const DEFAULT_STYLES = StyleSheet.create({
-    CONTAINER: { flex: 1 }
-})
 
 export default class App extends React.Component {
     constructor(props) {
@@ -45,20 +43,29 @@ export default class App extends React.Component {
         }
     }
 
+    styles = StyleSheet.create({
+        container: { flex: 1 },
+        map: { flex: 1 },
+        navigation: { width: '100%' }
+    })
+
     render() {
         return (
-            <MapView 
-                mapType = { "standard" }
-                style = { DEFAULT_STYLES.CONTAINER } 
-                provider = { PROVIDER_GOOGLE } 
-                customMapStyle = { mapStyle } 
-                showsUserLocation
-                followUserLocation
-                showsMyLocationButton
-                loadingEnabled
-                pitchEnabled = { false }
-                region={ this.getMapRegion() }
-            />
+            <View style = { this.styles.container } >
+                <Navigation />
+                <MapView 
+                    mapType = { "standard" }
+                    style = { this.styles.map } 
+                    provider = { PROVIDER_GOOGLE } 
+                    customMapStyle = { mapStyle } 
+                    showsUserLocation
+                    followUserLocation
+                    showsMyLocationButton
+                    loadingEnabled
+                    pitchEnabled = { false }
+                    region={ this.getMapRegion() }
+                />
+            </View>
         );
     }
 
